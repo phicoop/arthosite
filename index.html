@@ -1,142 +1,259 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxus-Uhrenmanufaktur – Offizielle Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - 4 New Projects</title>
+  
+  <!-- Nur noch für Text-Animationen nötig -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <style>
+    :root { --accent: #ff3e00; --bg: #0a1f3a; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    <link rel="stylesheet" href="arthos.css"> 
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: #fff;
+      overflow-x: hidden;
+      height: 600vh; /* Genug Höhe für langen Scroll */
+    }
+
+    header {
+      position: fixed;
+      top: 0; width: 100%;
+      padding: 30px;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
+
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Endloser blauer Hintergrund mit scroll-driven animation */
+    .background-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 200%; /* Doppelt so hoch für flüssigen Loop */
+      pointer-events: none;
+      z-index: 0;
+      background: url('https://i.imgur.com/7k5rP0Z.jpg') center top / 100% auto repeat-y;
+
+      /* Scroll-driven Animation */
+      animation: scrollBackground linear;
+      animation-timeline: scroll(root); /* Bindet an Scrollposition der Seite */
+      animation-range: 0% 100%;
+    }
+
+    @keyframes scrollBackground {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); } /* Bewegt um die Hälfte der Höhe */
+    }
+
+    /* Leichter Overlay für Tiefe */
+    .background-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0, 20, 50, 0.4) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .parallax-img {
+      position: absolute;
+      top: -10%; left: 0;
+      width: 100%; height: 120%;
+      object-fit: cover;
+      opacity: 0.3;
+      z-index: 2;
+      filter: brightness(1.2) contrast(1.1);
+    }
+
+    .project-overlay {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h2 { 
+      font-size: 10vw; 
+      text-transform: uppercase; 
+      line-height: 0.85; 
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
     
+    h2 span { 
+      display: inline-block; 
+      opacity: 0; 
+      transform: translateY(80px) rotate(5deg); 
+    }
+    
+    p { 
+      font-size: 1.2rem; 
+      max-width: 500px; 
+      margin: 0 auto; 
+      opacity: 0; 
+      transform: translateY(20px);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    #collections {
+      background: rgba(0, 10, 30, 0.7);
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+      backdrop-filter: blur(5px);
+    }
+
+    .carousel { 
+      display: flex; 
+      overflow-x: auto; 
+      padding: 50px; 
+      gap: 30px; 
+      scrollbar-width: none; 
+    }
+    .product-card { 
+      flex: 0 0 300px; 
+      background: rgba(255,255,255,0.1); 
+      padding: 20px; 
+      border-radius: 10px; 
+      backdrop-filter: blur(10px);
+    }
+    .product-img-small { 
+      width: 100%; 
+      height: 250px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+    }
+    footer { 
+      padding: 80px 20px; 
+      text-align: center; 
+      background: rgba(0,0,0,0.6); 
+      border-top: 1px solid rgba(255,255,255,0.1); 
+    }
+  </style>
 </head>
 <body>
-    <style>
-   body {
-            background-image: url('mockbild1.png');
-        } 
-        </style>
- 
-    <header class="main-header">
-        <div class="logo"><img src="emblem.png"
-                           alt= "emblem"
-                          width ="150"></div>
-        <nav>
-            <ul>
-                <li class="has-mega-menu">
-                    <a href="uhren.html">Uhren</a>
-                    
-                    <div class="mega-menu">
-                        <div class="mega-menu-content">
-                            
-                            <div class="nav-arrow left">❮</div>
-                            
-                            <div class="product-scroll-container">
-                                <div class="product-gallery">
-                                    
-                                    <a href="#" class="product-card">
-                                        <div class="product-image" style="background-image: url('backgroundartho1.jpg');"></div>
-                                        <div class="product-name">Modell A</div>
-                                        <div class="product-series">Serie 2025</div>
-                                    </a>
-                                    
-                                    <a href="#" class="product-card">
-                                        <div class="product-image" style="background-image: url('placeholder-watch-2.jpg');"></div>
-                                        <div class="product-name">Modell B</div>
-                                        <div class="product-series">Edition</div>
-                                    </a>
-                                    
-                                    <a href="#" class="product-card">
-                                        <div class="product-image" style="background-image: url('placeholder-watch-3.jpg');"></div>
-                                        <div class="product-name">Modell C</div>
-                                        <div class="product-series">Klassik</div>
-                                    </a>
-                                    
-                                    <a href="#" class="product-card">
-                                        <div class="product-image" style="background-image: url('placeholder-watch-4.jpg');"></div>
-                                        <div class="product-name">Modell D</div>
-                                        <div class="product-series">Chronos</div>
-                                    </a>
-                                    
-                                </div>
-                            </div>
-                            
-                            <div class="nav-arrow right">❯</div>
-                            
-                        </div>
-                    </div>
-                </li>
-                
-                <li><a href="Geschichte.html">Geschichte</a></li>
-                <li><a href="Entdecken.html">Entdecken</a></li>
-                <li><a href="Händler.html">Händler</a></li>
-            </ul>
-        </nav>
-        
-        <div class="right-actions">
-            <div class="user-actions">
-                <a href="#">Suchen</a>
-                <a href="#">Login</a>
-            </div>
-            
-            <div class="language-switcher">
-                <span class="current-lang">DE</span>
-                <ul class="lang-list">
-                    <li class="active"><a href="#">Deutsch (DE)</a></li>
-                    <li><a href="en.html">English (EN)</a></li>
-                    <li><a href="fr.html">Français (FR)</a></li>
-                    <li><a href="it.html">Italiano (IT)</a></li>
-                    <li><a href="jp.html">日本語 (JP)</a></li>
-                </ul>
-            </div>
-        </div>
-        
-    </header>
 
-    <main class="hero-section">
-        <h1>BOLD DIALS </h1>
-    
-        <p>Entdecken Sie die neueste Kollektion der Meisterwerke.</p>
-        <a href="neueoKollektion.html" class="cta-button">Zur Kollektion</a>
+  <div class="background-container"></div>
 
+  <header class="main-header">
+    <div class="logo"><img src="emblem.png" alt="emblem" width="150"></div>
+  </header>
 
-          
-    </main>
-
-
-
-
-
-                  
-    </section>
-
-
-
-<section id="home" class="page-section2">
-    <div class="video-background">
-        <video autoplay muted loop id="background-video">
-            <source src="video1.mp4" type="video/mp4">
-            Ihr Browser unterstützt das Video-Tag nicht.
-        </video>
+  <section class="section">
+    <img src="https://picsum.photos/1920/1080?v=10" class="parallax-img">
+    <div class="project-overlay">
+      <h2><span>I</span><span>n</span><span>t</span><span>r</span><span>o</span></h2>
+      <p>Der Beginn einer digitalen Reise.</p>
     </div>
-    
-    <div class="content">
-        <h1>FROM</h1>
-        <h2>NATURE</h2>
-        <p>Der Text Ihrer Seite ist jetzt über dem Video platziert.</p>
+  </section>
+
+  <section id="collections">
+    <h2 style="font-size: 4vw;">Kollektion</h2>
+    <div class="carousel">
+      <div class="product-card"><img src="https://picsum.photos/400/500?v=1" class="product-img-small"><h3>Modell A</h3></div>
+      <div class="product-card"><img src="https://picsum.photos/400/500?v=2" class="product-img-small"><h3>Modell B</h3></div>
+      <div class="product-card"><img src="https://picsum.photos/400/500?v=3" class="product-img-small"><h3>Modell C</h3></div>
     </div>
-</section>
+  </section>
 
-    <section id="home" class="page-section3">
-                  
-    </section>
+  <section class="section">
+    <img src="https://picsum.photos/1920/1080?v=20" class="parallax-img">
+    <div class="project-overlay">
+      <h2><span>A</span><span>r</span><span>c</span><span>h</span></h2>
+      <p>Strukturelle Eleganz in Beton und Glas.</p>
+    </div>
+  </section>
 
+  <section class="section">
+    <img src="https://picsum.photos/1920/1080?v=30" class="parallax-img">
+    <div class="project-overlay">
+      <h2><span>G</span><span>l</span><span>o</span><span>w</span></h2>
+      <p>Lichtstudien in urbanen Nachtlandschaften.</p>
+    </div>
+  </section>
 
-    <footer class="main-footer">
-        <div class="footer-links">
-            <a href="#">Kontakt</a> | 
-            <a href="#">Impressum</a> | 
-            <a href="#">Datenschutz</a> |
-            <a href="#">Newsletter</a>
-        </div>
-        <p>&copy; 2025 Luxus Uhrenmanufaktur. Alle Rechte vorbehalten.</p>
+  <section class="section">
+    <img src="https://picsum.photos/1920/1080?v=40" class="parallax-img">
+    <div class="project-overlay">
+      <h2><span>V</span><span>o</span><span>i</span><span>d</span></h2>
+      <p>Minimalismus als Antwort auf das Chaos.</p>
+    </div>
+  </section>
 
-    </footer>
+  <section class="section">
+    <img src="https://picsum.photos/1920/1080?v=50" class="parallax-img">
+    <div class="project-overlay">
+      <h2><span>F</span><span>l</span><span>u</span><span>x</span></h2>
+      <p>Bewegung eingefroren in der Zeit.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Studio Alpha | Creative Direction</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Nur noch für Text und Parallax-Bilder pro Section
+    document.querySelectorAll('.section').forEach(section => {
+      const letters = section.querySelectorAll('h2 span');
+      const p = section.querySelector('p');
+      const parallaxImg = section.querySelector('.parallax-img');
+
+      if (parallaxImg) {
+        gsap.to(parallaxImg, {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      }
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 40%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      tl.to(letters, {
+        opacity: 1,
+        y: 0,
+        rotation: 0,
+        stagger: 0.04,
+        duration: 0.7,
+        ease: "power4.out"
+      })
+      .to(p, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5
+      }, "-=0.3");
+    });
+  </script>
+</body>
+</html>
